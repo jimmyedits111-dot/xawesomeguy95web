@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xawesomeguy95s Website!</title>
+    <style>
+        /* Whole screen background setup */
+        body {
+            background-color: #00bfbf; 
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center; 
+            align-items: center;     
+            height: 100vh;           
+        }
+
+        /* Your 700x700 square box layout */
+        .gaming-box {
+            width: 700px;           
+            height: 700px;          
+            border: 6px solid #0055ff; 
+            background-color: #ffffff; 
+            box-sizing: border-box; 
+            overflow-y: auto;
+            padding: 0px 30px 0px 30px; 
+            font-family: Arial, sans-serif;
+            
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; 
+            align-items: center;
+            position: relative;
+        }
+
+        /* Container to group elements at the top */
+        .top-content {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* YouTube Image Link styling */
+        .youtube-image-link {
+            display: block;
+            margin: 0;
+            padding: 0;
+        }
+
+        .youtube-image-link img {
+            width: 200px; 
+            height: auto; 
+            display: block;
+            margin: 0 auto; 
+            transition: transform 0.2s ease;
+        }
+
+        .youtube-image-link:hover img {
+            transform: scale(1.05); 
+        }
+
+        /* Retro Search Bar Styling */
+        .search-container {
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .retro-search {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 8px 12px;
+            font-size: 14px;
+            border: 2px solid #333333;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            font-family: Arial, sans-serif;
+            color: #111111;
+        }
+
+        .retro-search:focus {
+            outline: none;
+            border-color: #0055ff;
+            background-color: #ffffff;
+        }
+
+        /* Dynamic Content Wrapper */
+        .tab-content-wrapper {
+            width: 100%;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        /* Hide sections by default */
+        .page-section {
+            display: none;
+            width: 100%;
+        }
+
+        /* Class to show the active section */
+        .page-section.active-section {
+            display: block;
+        }
+
+        /* Layout for Video and Text side-by-side on Home Tab */
+        .home-layout {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+            width: 100%;
+            margin-bottom: 25px; 
+        }
+
+        /* Clickable Video Card Style */
+        .video-card {
+            display: block;
+            width: 320px; 
+            height: 180px;
+            position: relative;
+            border: 3px solid #0055ff;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+
+        .video-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .video-card .video-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: #ffffff;
+            padding: 8px 12px;
+            font-size: 13px;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        .video-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0px 6px 12px rgba(0, 85, 255, 0.3);
+        }
+
+        /* Video Details text area */
+        .video-details {
+            flex-grow: 1;
+            color: #1a1a1a;
+        }
+
+        .video-details h2 {
+            margin: 0 0 10px 0;
+            font-size: 22px;
+            color: #0055ff;
+            font-weight: bold;
+        }
+
+        .video-details p {
+            margin: 0;
+            font-size: 15px;
+            line-height: 1.5;
+            color: #444444;
+        }
+
+        /* 2010 Retro Glossy News Container */
+        .news-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 15px; 
+        }
+
+        /* Glossy News Post Block Layout */
+        .news-box {
+            width: 100%;
+            box-sizing: border-box;
+            background: linear-gradient(to bottom, #2b2b2b 0%, #111111 100%);
+            border: 3px solid #333333;
+            border-radius: 6px;
+            padding: 20px;
+            box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.2), 0px 4px 6px rgba(0,0,0,0.3);
+            color: #ffffff;
+        }
+
+        .news-box h3 {
+            margin: 0 0 4px 0;
+            font-family: "Impact", "Arial Black", sans-serif;
+            font-size: 22px;
+            color: #0088ff; 
+            text-transform: uppercase;
+            text-shadow: 1px 1px 2px #000000;
+            letter-spacing: 0.5px;
+        }
+
+        /* Specific Highlight header for new releases */
+        .news-box.release h3 {
+            color: #ffcc00;
+        }
+
+        /* Timestamp style for older gaming blogs */
+        .news-date {
+            font-size: 11px;
+            color: #888888;
+            margin-bottom: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .news-box p {
+            margin: 0 0 15px 0;
+            font-size: 15px;
+            line-height: 1.5;
+            color: #dddddd;
+        }
+
+        .news-box a {
+            color: #0088ff;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        .news-box a:hover {
+            color: #ffffff;
+        }
+
+        /* News/Gallery Image styling to keep screenshots sizing nicely */
+        .news-image, .gallery-image {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            border: 2px solid #0055ff;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Classic Blinking Construction Badge */
+        .construction-tag {
+            display: inline-block;
+            background-color: #ffcc00;
+            color: #000000;
+            font-weight: bold;
+            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 3px;
+            text-transform: uppercase;
+            border: 1px solid #b38f00;
+            animation: retro-blink 1.2s infinite;
+        }
+
+        @keyframes retro-blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.4; }
+            100% { opacity: 1; }
+        }
+
+        /* Retro stylized text layout for placeholder areas */
+        .placeholder-text {
+            color: #1a1a1a;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .placeholder-text h3 {
+            font-family: "Impact", "Arial Black", sans-serif;
+            font-size: 28px;
+            color: #0055ff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 0 0 10px 0;
+        }
+
+        .placeholder-text p {
+            font-size: 18px;
+            font-weight: bold;
+            color: #444444;
+            margin: 0;
+        }
+
+        /* 2010 Retro Glossy Bar Sticky Mode */
+        .tab-bar {
+            display: flex;
+            justify-content: center;
+            background: linear-gradient(to bottom, #4c4c4c 0%, #111111 50%, #000000 51%, #1c1c1c 100%);
+            border: 2px solid #333333;
+            border-radius: 10px;
+            padding: 4px;
+            width: 100%;
+            max-width: 580px; 
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5), inset 0px 1px 0px rgba(255, 255, 255, 0.3);
+            
+            /* Sticky position styles to scroll along with you */
+            position: sticky;
+            bottom: 20px;
+            margin-top: auto;
+            margin-bottom: 20px;
+            z-index: 100;
+        }
+
+        /* Individual tab attributes */
+        .tab-btn {
+            flex: 1;
+            text-align: center;
+            padding: 10px 15px;
+            text-decoration: none;
+            color: #cccccc;
+            font-family: "Impact", "Arial Black", sans-serif; 
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 2px #000000;
+            border-radius: 6px;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: all 0.1s ease-in-out;
+        }
+
+        /* Classic Neon Glow Hover Effect */
+        .tab-btn:hover {
+            color: #ffffff;
+            background: linear-gradient(to bottom, #0088ff 0%, #0055ff 100%);
+            border: 1px solid #0033aa;
+            box-shadow: 0px 0px 10px #0055ff;
+        }
+
+        .tab-btn.active {
+            color: #ffffff;
+            background: linear-gradient(to bottom, #0055ff 0%, #002288 100%);
+            border: 1px solid #001155;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="gaming-box">
+        
+        <div class="top-content">
+            <a href="https://www.youtube.com/@gi9-86ji" target="_blank" class="youtube-image-link">
+                <img src="youtube.png" alt="Visit My YouTube Channel">
+            </a>
+
+            <div class="tab-content-wrapper">
+                
+                <div id="home-section" class="page-section active-section">
+                    <div class="search-container">
+                        <input type="text" class="retro-search" id="videoSearch" onkeyup="searchVideos()" placeholder="Search videos...">
+                    </div>
+                    
+                    <div id="videoContainer">
+                        <div class="home-layout">
+                            <a href="https://www.youtube.com/watch?v=wU-UXAHkjQw" target="_blank" class="video-card">
+                                <img src="https://i.ytimg.com/vi/wU-UXAHkjQw/maxresdefault.jpg" alt="My Minecraft World - Ep8">
+                                <div class="video-overlay">
+                                    ▶ Watch on YouTube
+                                </div>
+                            </a>
+                            <div class="video-details">
+                                <h2>My Minecraft World - Ep8</h2>
+                                <p>Ignore that i said that i not gonna edit this. And i trying to make the website right now</p>
+                            </div>
+                        </div>
+
+                        <div class="home-layout">
+                            <a href="https://www.youtube.com/watch?v=ZuJsoYdiIKw&t=8s" target="_blank" class="video-card">
+                                <img src="https://i.ytimg.com/vi/ZuJsoYdiIKw/maxresdefault.jpg" alt="The Minecraft World - Ep7">
+                                <div class="video-overlay">
+                                    ▶ Watch on YouTube
+                                </div>
+                            </a>
+                            <div class="video-details">
+                                <h2>The Minecraft World - Ep7</h2>
+                                <p>This is Episode 7 Of our world of Minecraft!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="news-section" class="page-section">
+                    <div class="search-container">
+                        <input type="text" class="retro-search" id="newsSearch" onkeyup="searchNews()" placeholder="Search news updates...">
+                    </div>
+
+                    <div class="news-container" id="newsContainer">
+                        
+                        <div class="news-box release">
+                            <h3>Ep8 is now here!</h3>
+                            <div class="news-date">Posted: Just Now</div>
+                            <p>Ignore that i said that i not gonna edit this. And i trying to make the website right now</p>
+                            <p>Watch the video here: <a href="https://www.youtube.com/watch?v=wU-UXAHkjQw" target="_blank">https://www.youtube.com/watch?v=wU-UXAHkjQw</a></p>
+                        </div>
+                        
+                        <div class="news-box">
+                            <h3>Ep8 is in progress</h3>
+                            <div class="news-date">Posted: June 2026</div>
+                            <img src="2010-06-24.png" alt="Minecraft Game Menu screenshot" class="news-image">
+                            <p>Hey guys so notch updated Minecraft so its like 5:12 am right now by the time in trying this RIGHTNOW so yes</p>
+                        </div>
+
+                        <div class="news-box">
+                            <h3>Welcome to Xawesomeguy59s Website</h3>
+                            <div class="news-date">Posted: June 2026</div>
+                            <p>Welcome to my website where all of my videos and gallery are here!</p>
+                            <div class="construction-tag">⚠️ Under Construction</div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div id="info-section" class="page-section">
+                    <div class="placeholder-text" style="margin-top: 60px;">
+                        <p>Coming soon!</p>
+                    </div>
+                </div>
+
+                <div id="gallery-section" class="page-section">
+                    <div class="placeholder-text">
+                        <h3>Image Gallery</h3>
+                        <div style="display: flex; justify-content: center; margin-top: 15px;">
+                            <img src="2010-06-24.png" alt="Minecraft Infdev Screenshot" class="gallery-image">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="tab-bar">
+            <span class="tab-btn active" onclick="switchTab('home-section', this)">Home</span>
+            <span class="tab-btn" onclick="switchTab('news-section', this)">News</span>
+            <span class="tab-btn" onclick="switchTab('info-section', this)">Info</span>
+            <span class="tab-btn" onclick="switchTab('gallery-section', this)">Gallery</span>
+        </div>
+
+    </div>
+
+    <script>
+        // Core Tab Switcher
+        function switchTab(sectionId, clickedButton) {
+            const sections = document.querySelectorAll('.page-section');
+            sections.forEach(section => {
+                section.classList.remove('active-section');
+            });
+
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(button => {
+                button.classList.remove('active');
+            });
+
+            document.getElementById(sectionId).classList.add('active-section');
+            clickedButton.classList.add('active');
+        }
+
+        // Live Video Search Filter
+        function searchVideos() {
+            let input = document.getElementById('videoSearch').value.toLowerCase();
+            let videoItems = document.querySelectorAll('#videoContainer .home-layout');
+            
+            videoItems.forEach(item => {
+                let title = item.querySelector('h2').innerText.toLowerCase();
+                let desc = item.querySelector('p').innerText.toLowerCase();
+                if (title.includes(input) || desc.includes(input)) {
+                    item.style.display = "flex";
+                } else {
+                    item.style.display = "none";
+                }
+            });
+        }
+
+        // Live News Search Filter
+        function searchNews() {
+            let input = document.getElementById('newsSearch').value.toLowerCase();
+            let newsItems = document.querySelectorAll('#newsContainer .news-box');
+            
+            newsItems.forEach(item => {
+                let title = item.querySelector('h3').innerText.toLowerCase();
+                let body = item.querySelector('p').innerText.toLowerCase();
+                if (title.includes(input) || body.includes(input)) {
+                    item.style.display = "block";
+                } else {
+                    item.style.display = "none";
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
